@@ -7,6 +7,8 @@ from  django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from .models import *
 from django.contrib import messages
+import subprocess
+import os
 
 def first(request):
     return render(request,'index.html')
@@ -67,3 +69,9 @@ def logout(request):
 def viewuser(request):
     data=register.objects.all()
     return render(request,'viewuser.html',{'data':data})
+
+def launch_app(request):
+    # script_path = os.path.join(settings.BASE_DIR, 'eye_blink_det', 'eyeblink.py')
+    # subprocess.Popen(['python', script_path])
+    os.system('python eye_blink_det/eyeblink.py')
+    return HttpResponse("Eye Blink Detection App Launched!")
